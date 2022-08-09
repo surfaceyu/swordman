@@ -8,9 +8,9 @@
         <br>
         左：{{ leftMapName }}
         <br>
-        右： {{ rightMapName }}
+        右：{{ rightMapName }}
         <br>
-        下： {{ buttonMapName }}
+        下：{{ buttonMapName }}
     </p>
 </template>
 
@@ -25,7 +25,4 @@ let leftMapName = ref("自由大道西")
 let rightMapName = ref("自由大道东")
 let buttonMapName = ref("自由村")
 
-function clickAboutGame() {
-    emits("gameContentClick", "AboutGame")
-}
 </script>

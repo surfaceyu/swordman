@@ -1,9 +1,9 @@
 package middleware
 
 import (
+	"swordsman/logger"
+	"swordsman/model"
 	"time"
-	"wordGame/logger"
-	"wordGame/model"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"

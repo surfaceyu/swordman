@@ -5,3 +5,4 @@ go.sum
 **/logs/
 */pnpm-lock.yaml
 word_game.zip
+__debug_bin.exe

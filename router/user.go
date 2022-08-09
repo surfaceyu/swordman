@@ -1,8 +1,8 @@
 package router
 
 import (
-	"wordGame/controller"
-	"wordGame/middleware"
+	"swordsman/controller"
+	"swordsman/middleware"
 
 	"github.com/gin-gonic/gin"
 )

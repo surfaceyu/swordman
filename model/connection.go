@@ -1,8 +1,8 @@
 package model
 
 import (
+	"swordsman/logger"
 	"time"
-	"wordGame/logger"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -25,8 +25,12 @@ func init() {
 	if err = db.DB().Ping(); err != nil {
 		logger.Fatal(err)
 	}
-
-	db.AutoMigrate(&Account{})
-
 	Conn = db
+
+	autoMigrate()
+}
+
+func autoMigrate() {
+	Conn.AutoMigrate(&Account{})
+	Conn.AutoMigrate(&User{})
 }

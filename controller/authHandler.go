@@ -2,9 +2,9 @@ package controller
 
 import (
 	"net/http"
-	"wordGame/consts"
-	"wordGame/model"
-	"wordGame/services"
+	"swordsman/consts"
+	"swordsman/model"
+	"swordsman/services"
 
 	"github.com/gin-gonic/gin"
 )

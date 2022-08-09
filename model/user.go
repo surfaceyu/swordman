@@ -6,26 +6,26 @@ import (
 	"time"
 )
 
-type Account struct {
+type User struct {
 	ID        string `gorm:"primary_key;size:128"`
-	Passwd    string
+	Name      string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt *time.Time `sql:"index"`
 }
 
 // 指定表名
-func (Account) TableName() string {
-	return "account"
+func (User) TableName() string {
+	return "user"
 }
 
-func FindUser(id string) Account {
-	var loginAccount Account
-	Conn.First(&loginAccount, Account{ID: id})
-	return loginAccount
+func GetRole(id string) User {
+	var role User
+	Conn.First(&role, User{ID: id})
+	return role
 }
 
-func AddUser(user *Account) error {
+func CreateRole(user *User) error {
 	if err := Conn.Create(user).Error; err != nil {
 		logger.Fatal(err)
 		return consts.ADD_DATA_ERROR

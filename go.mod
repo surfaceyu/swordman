@@ -1,4 +1,4 @@
-module wordGame
+module swordsman
 
 go 1.18
 

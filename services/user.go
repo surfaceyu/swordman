@@ -1,6 +1,6 @@
 package services
 
-import "wordGame/model"
+import "swordsman/model"
 
 var (
 	// 所有的业务类都在这儿声明
@@ -16,4 +16,8 @@ func (p *UserMgr) FindUser(id string) model.Account {
 
 func (p *UserMgr) SaveUser(user *model.Account) error {
 	return model.AddUser(user)
+}
+
+func (p *UserMgr) CreateRole() {
+
 }

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"wordGame/logger"
-	_ "wordGame/logger"
-	"wordGame/middleware"
-	"wordGame/model"
-	"wordGame/router"
+	"swordsman/logger"
+	_ "swordsman/logger"
+	"swordsman/middleware"
+	"swordsman/model"
+	"swordsman/router"
 
 	"github.com/gin-gonic/gin"
 )
