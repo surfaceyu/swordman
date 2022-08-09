@@ -8,7 +8,7 @@ import (
 )
 
 func loginRouter(r *gin.RouterGroup) {
-	g := r.Group("/user")
+	g := r.Group("/auth")
 	// 登录
 	g.POST("login", middleware.AuthMiddleware.LoginHandler)
 	// 注册

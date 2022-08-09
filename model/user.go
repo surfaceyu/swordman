@@ -3,6 +3,7 @@ package model
 import (
 	"swordsman/consts"
 	"swordsman/logger"
+	"swordsman/msg"
 	"time"
 )
 
@@ -17,6 +18,13 @@ type User struct {
 // 指定表名
 func (User) TableName() string {
 	return "user"
+}
+
+func (u User) ToFront() msg.User {
+	return msg.User{
+		ID:   u.ID,
+		Name: u.Name,
+	}
 }
 
 func GetRole(id string) User {

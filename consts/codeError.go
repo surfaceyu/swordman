@@ -1,7 +1,5 @@
 package consts
 
-import "github.com/gin-gonic/gin"
-
 type CodeError struct {
 	Code    int
 	Message string
@@ -14,10 +12,3 @@ var (
 	CodeErrorParam  = CodeError{1003, "参数错误"}
 	CodeErrorHasReg = CodeError{1001, "账号已注册"}
 )
-
-func Code(code CodeError) gin.H {
-	return gin.H{
-		"code":    code.Code,
-		"message": code.Message,
-	}
-}

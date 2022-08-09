@@ -3,6 +3,7 @@ package model
 import (
 	"swordsman/consts"
 	"swordsman/logger"
+	"swordsman/msg"
 	"time"
 )
 
@@ -17,6 +18,13 @@ type Account struct {
 // 指定表名
 func (Account) TableName() string {
 	return "account"
+}
+
+func (a Account) ToFront() msg.Account {
+	return msg.Account{
+		ID:     a.ID,
+		Passwd: a.Passwd,
+	}
 }
 
 func FindUser(id string) Account {
