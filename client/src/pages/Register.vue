@@ -9,10 +9,10 @@
                 <el-input v-model.number="ruleForm.account" />
             </el-form-item>
             <el-form-item label="密码" prop="pass">
-                <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+                <el-input v-model="ruleForm.pass" type="password" show-password autocomplete="off" />
             </el-form-item>
             <el-form-item label="确认密码" prop="passCheck">
-                <el-input v-model="ruleForm.passCheck" type="password" autocomplete="off" />
+                <el-input v-model="ruleForm.passCheck" type="password" show-password autocomplete="off" />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm(ruleFormRef)">注册</el-button>

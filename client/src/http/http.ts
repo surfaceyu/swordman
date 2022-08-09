@@ -67,6 +67,7 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
         if (isAuthorization && error.request.status == 401) {
             router.push("/login")
         }
+        return error.request
     }
 }
 
@@ -83,6 +84,7 @@ async function Delete(u: string, data = {}, isAuthorization = true) : Promise<an
         if (isAuthorization && error.request.status == 401) {
             router.push("/login")
         }
+        return error.request
     }
 }
 

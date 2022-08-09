@@ -17,8 +17,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const emits = defineEmits(["gameContentClick"])
-
 let mapName = ref("自由大道")
 let topMapName = ref("朱雀大街")
 let leftMapName = ref("自由大道西")
