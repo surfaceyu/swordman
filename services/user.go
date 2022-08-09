@@ -6,27 +6,35 @@ import (
 
 var (
 	// 所有的业务类都在这儿声明
-	UserService = &UserMgr{}
+	UserService = &UserMgr{
+		serverId: 1001,
+	}
 )
 
 type UserMgr struct {
+	serverId int32
 }
 
-func (p *UserMgr) FindUser(id string) model.Account {
-	return model.FindUser(id)
+func (um *UserMgr) IncrUid(accountId uint) int64 {
+	return int64(um.serverId*1000000) + int64(accountId)
 }
 
-func (p *UserMgr) SaveUser(user *model.Account) error {
+func (um *UserMgr) FindUser(account string) model.Account {
+	return model.FindUser(account)
+}
+
+func (um *UserMgr) SaveUser(user *model.Account) error {
 	return model.AddUser(user)
 }
 
-func (p *UserMgr) CreateRole(id string, name string) error {
+func (um *UserMgr) CreateRole(accountId uint, name string) error {
 	return model.CreateRole(&model.User{
-		ID:   id,
-		Name: name,
+		ID:       um.IncrUid(accountId),
+		UserName: name,
 	})
 }
 
-func (p *UserMgr) GetRole(id string) model.User {
-	return model.GetRole(id)
+func (um *UserMgr) GetRole(accountId uint) model.User {
+	uid := um.IncrUid(accountId)
+	return model.GetRole(uid)
 }

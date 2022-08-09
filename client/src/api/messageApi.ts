@@ -2,24 +2,24 @@ import { h } from 'vue'
 import { ElMessage } from 'element-plus'
 
 const OpenLoginSuccessMessage = () => {
-    ElMessage({
-        message: h('p', null, [
-            h('span', null, '恭喜你! '),
-            h('i', { style: 'color: teal' }, '登录成功'),
-        ]),
-    })
+    ElMessage.success("恭喜你！登录成功")
+}
+
+const OpenLoginErrorMessage = () => {
+    ElMessage.error("账号或密码错误")
 }
 
 const OpenLogoutMessage = () => {
-    ElMessage({
-        message: h('p', null, [
-            h('span', null, '恭喜你! '),
-            h('i', { style: 'color: red' }, '登出成功'),
-        ]),
-    })
+    ElMessage.success("恭喜你！登出成功")
+}
+
+const OpenRegisterMessage = () => {
+    ElMessage.success("恭喜你！注册成功")
 }
 
 export {
     OpenLoginSuccessMessage,
-    OpenLogoutMessage
+    OpenLoginErrorMessage,
+    OpenLogoutMessage,
+    OpenRegisterMessage,
 }

@@ -11,8 +11,9 @@ import (
 )
 
 var (
-	userIdentityKey = "id"
-	AuthMiddleware  *jwt.GinJWTMiddleware
+	userIdentityKey     = "id"
+	userIdentityAccount = "account"
+	AuthMiddleware      *jwt.GinJWTMiddleware
 )
 
 func init() {
@@ -46,7 +47,8 @@ func init() {
 func payloadFunc(data interface{}) jwt.MapClaims {
 	if v, ok := data.(msg.Account); ok {
 		return jwt.MapClaims{
-			userIdentityKey: v.ID,
+			userIdentityKey:     v.ID,
+			userIdentityAccount: v.Account,
 		}
 	}
 	return jwt.MapClaims{}
@@ -58,14 +60,15 @@ func authenticator(c *gin.Context) (interface{}, error) {
 	if err := c.ShouldBind(&loginVal); err != nil {
 		return nil, jwt.ErrMissingLoginValues
 	}
-	userID := loginVal.ID
+	userAccount := loginVal.Account
 	password := loginVal.Passwd
 
-	var loginAccount = services.UserService.FindUser(userID)
-	if loginAccount.ID == userID && loginAccount.Passwd == password {
+	var loginAccount = services.UserService.FindUser(userAccount)
+	if loginAccount.ID != 0 && loginAccount.Passwd == password {
 		return msg.Account{
-			ID:     userID,
-			Passwd: password,
+			ID:      loginAccount.ID,
+			Account: loginAccount.Account,
+			Passwd:  password,
 		}, nil
 	}
 	return nil, jwt.ErrFailedAuthentication
@@ -74,7 +77,7 @@ func authenticator(c *gin.Context) (interface{}, error) {
 // 请求接口权限验证
 //当用户通过token请求受限接口时，会经过这段逻辑
 func authorizator(data interface{}, c *gin.Context) bool {
-	if v, ok := data.(msg.Account); ok && v.ID != "" {
+	if v, ok := data.(msg.Account); ok && v.ID != 0 {
 		return true
 	}
 	return false
@@ -91,6 +94,7 @@ func unauthorized(c *gin.Context, code int, message string) {
 func JwtAccount(c *gin.Context) msg.Account {
 	claims := jwt.ExtractClaims(c)
 	return msg.Account{
-		ID: claims[userIdentityKey].(string),
+		ID:      uint(claims[userIdentityKey].(float64)),
+		Account: claims[userIdentityAccount].(string),
 	}
 }

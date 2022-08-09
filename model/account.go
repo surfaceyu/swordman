@@ -2,13 +2,13 @@ package model
 
 import (
 	"swordsman/consts"
-	"swordsman/logger"
 	"swordsman/msg"
 	"time"
 )
 
 type Account struct {
-	ID        string `gorm:"primary_key;size:128"`
+	ID        uint   `gorm:"primary_key"`
+	Account   string `gorm:"uniqueIndex"`
 	Passwd    string
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -22,20 +22,20 @@ func (Account) TableName() string {
 
 func (a Account) ToFront() msg.Account {
 	return msg.Account{
-		ID:     a.ID,
-		Passwd: a.Passwd,
+		ID:      a.ID,
+		Account: a.Account,
+		Passwd:  a.Passwd,
 	}
 }
 
-func FindUser(id string) Account {
+func FindUser(account string) Account {
 	var loginAccount Account
-	Conn.First(&loginAccount, Account{ID: id})
+	Conn.First(&loginAccount, Account{Account: account})
 	return loginAccount
 }
 
 func AddUser(user *Account) error {
 	if err := Conn.Create(user).Error; err != nil {
-		logger.Fatal(err)
 		return consts.ADD_DATA_ERROR
 	}
 	return nil

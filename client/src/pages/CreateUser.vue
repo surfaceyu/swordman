@@ -27,6 +27,7 @@ import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import router from "../router"
 import http from '../http/http'
+import { OpenRegisterMessage } from '../api/messageApi';
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -77,13 +78,13 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate(async (valid) => {
         if (valid) {
-            const res = await http.Put("/user/login", {
-                "ID": ruleForm.account,
+            const res = await http.Put("/auth/login", {
+                "Account": ruleForm.account,
                 "Passwd": ruleForm.pass
             }, false)
             if (res && res.code == 200) {
                 router.replace("/login")
-                // OpenLoginSuccessMessage()
+                OpenRegisterMessage()
             }
         } else {
             console.log('error submit!')

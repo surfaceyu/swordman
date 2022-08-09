@@ -50,6 +50,7 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
         if (isAuthorization && error.request.status == 401) {
             router.push("/login")
         }
+        return error.request
     }
 }
 

@@ -33,12 +33,12 @@ func init() {
 		IdentityHandler: func(c *gin.Context) interface{} {
 			claims := jwt.ExtractClaims(c)
 			return &model.Account{
-				ID: claims[adminIdentityKey].(string),
+				ID: claims[adminIdentityKey].(uint),
 			}
 		},
 		Authenticator: authenticator, //在这里可以写我们的登录验证逻辑
 		Authorizator: func(data interface{}, c *gin.Context) bool { //当用户通过token请求受限接口时，会经过这段逻辑
-			if v, ok := data.(*model.Account); ok && v.ID == "admin" {
+			if v, ok := data.(*model.Account); ok && v.Account == "admin" {
 				return true
 			}
 
@@ -77,12 +77,12 @@ func init() {
 		IdentityHandler: func(c *gin.Context) interface{} {
 			claims := jwt.ExtractClaims(c)
 			return &model.Account{
-				ID: claims[adminIdentityKey].(string),
+				ID: claims[adminIdentityKey].(uint),
 			}
 		},
 		Authenticator: adminAuthenticator, //在这里可以写我们的登录验证逻辑
 		Authorizator: func(data interface{}, c *gin.Context) bool { //当用户通过token请求受限接口时，会经过这段逻辑
-			if v, ok := data.(*model.Account); ok && v.ID == "admin" {
+			if v, ok := data.(*model.Account); ok && v.Account == "admin" {
 				return true
 			}
 			return false
@@ -109,13 +109,14 @@ func adminAuthenticator(c *gin.Context) (interface{}, error) {
 	if err := c.ShouldBind(&loginVal); err != nil {
 		return "", jwt.ErrMissingLoginValues
 	}
-	userID := loginVal.ID
+	userAccount := loginVal.Account
 	password := loginVal.Passwd
 
-	if (userID == "admin" && password == "admin") || (userID == "test" && password == "test") {
+	if (userAccount == "admin" && password == "admin") || (userAccount == "test" && password == "test") {
 		return &model.Account{
-			ID:     "admin",
-			Passwd: "admin",
+			ID:      0,
+			Account: "admin",
+			Passwd:  "admin",
 		}, nil
 	}
 	return nil, jwt.ErrFailedAuthentication

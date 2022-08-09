@@ -1,11 +1,17 @@
 package msg
 
 type Account struct {
-	ID     string
-	Passwd string
+	ID      uint
+	Account string
+	Passwd  string
 }
 
 type User struct {
-	ID   string
+	ID   int64
 	Name string
+}
+
+type CreateRole struct {
+	Name string
+	Sex  int8
 }

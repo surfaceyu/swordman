@@ -25,13 +25,14 @@ func GetRole(c *gin.Context) {
 }
 
 func CreateRole(c *gin.Context) {
-	var createRole msg.User
+	var createRole msg.CreateRole
 	_ = c.Bind(&createRole)
-	if createRole == (msg.User{}) {
+	account := middleware.JwtAccount(c)
+	if createRole == (msg.CreateRole{}) {
 		c.JSON(http.StatusOK, utils.ResultT(consts.CodeErrorParam, "", nil))
 		return
 	}
-	if err := services.UserService.CreateRole(createRole.ID, createRole.Name); err != nil {
+	if err := services.UserService.CreateRole(account.ID, createRole.Name); err != nil {
 		c.JSON(http.StatusOK, utils.ResultT(consts.CodeErrorParam, "", nil))
 		return
 	}

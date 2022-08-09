@@ -9,12 +9,12 @@ const gameContentIdCache = localStorage.getItem("gameContentId")
 let gameContentId = ref(gameContentIdCache || "Map")
 
 onBeforeMount(async () => {
-    const res = await http.Get("/hello/hello")
+    const res = await http.Get("/user/hello")
     console.log("onBeforeMount = ", res)
 })
 
 async function logout() {
-    await http.Post("/user/logout")
+    await http.Post("/auth/logout")
     OpenLogoutMessage()
     localStorage.removeItem("token")
     router.replace("/login")

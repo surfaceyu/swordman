@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
-import { OpenLoginSuccessMessage } from '../api/messageApi';
+import { OpenLoginErrorMessage, OpenLoginSuccessMessage } from '../api/messageApi';
 import router from "../router"
 import http from '../http/http'
 
@@ -62,14 +62,17 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate(async (valid) => {
         if (valid) {
-            const res = await http.Post("/user/login", {
-                "ID": ruleForm.account,
+            const res = await http.Post("/auth/login", {
+                "Account": ruleForm.account,
                 "Passwd": ruleForm.pass
             }, false)
             if (res && res.code == 200) {
                 localStorage.setItem('token', res.token);
                 router.replace("/game")
                 OpenLoginSuccessMessage()
+            }
+            if (res && res.status == 401) {
+                OpenLoginErrorMessage()
             }
         } else {
             console.log('error submit!')
