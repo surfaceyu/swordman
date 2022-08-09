@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
-import { OpenLogoutMessage } from '../api/messageApi';
 import http from '../http/http.js';
-import router from '../router.js';
 import Functions from '../components/Functions.vue';
+import Footer from '../components/Footer.vue';
 
 const gameContentIdCache = localStorage.getItem("gameContentId")
 let gameContentId = ref(gameContentIdCache || "Map")
@@ -13,13 +12,6 @@ onBeforeMount(async () => {
     console.log("onBeforeMount = ", res)
 })
 
-async function logout() {
-    await http.Post("/auth/logout")
-    OpenLogoutMessage()
-    localStorage.removeItem("token")
-    router.replace("/login")
-}
-
 function gameContentClick(id: string) {
     localStorage.setItem("gameContentId", id)
     gameContentId.value = id
@@ -28,10 +20,10 @@ function gameContentClick(id: string) {
 
 <template>
     <component :is="gameContentId" @game-content-click="gameContentClick"></component>
+    <el-divider />
     <Functions @game-content-click="gameContentClick" />
-    <p>
-        <a href="javascript:void(0)" @click="logout">退出游戏</a>
-    </p>
+    <el-divider />
+    <Footer @game-content-click="gameContentClick" />
 </template>
 
 <style scoped>

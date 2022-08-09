@@ -16,7 +16,7 @@
                 <el-button @click="resetForm(ruleFormRef)">重置</el-button>
             </el-form-item>
             <el-form-item>
-                <router-link to="/createUser">没有账号？先去注册</router-link>
+                <router-link to="/register">没有账号？先去注册</router-link>
             </el-form-item>
         </el-form>
     </el-row>

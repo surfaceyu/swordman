@@ -12,10 +12,6 @@
         <a href="javascript:void(0)">洞府</a>·
         <a href="javascript:void(0)">门派</a>
         <br>
-        <a href="javascript:void(0)">设置</a>
-        <br>
-        <a href="javascript:void(0)" @click="gameContentClick('AboutGame')">游戏介绍</a>
-        <br>
     </p>
 </template>
 
