@@ -11,20 +11,24 @@
         你记得你叫
         <br>
     </p>
-    <Input place-str="请输入你的名字" @on-chat-button-click="onChatButtonClick"/>
+    <Input place-str="请输入你的名字" @on-chat-button-click="onChatButtonClick" />
     <a @click="gameContentClick('Map')"></a>
 </template>
 
 <script setup lang="ts">
-import { MessageInfo } from '../api/messageApi';
+import { MessageInfo, MessageError } from '../api/messageApi';
 import http from '../http/http';
 import Input from './Input.vue';
 
 async function onChatButtonClick(name: string) {
-    const res = await http.Put("/user/role", {"Name": name})
-    if (res && res.code == 200) {
-        gameContentClick("Map")
-        MessageInfo("欢迎你！"+name)
+    const res = await http.Put("/user/role", { "Name": name })
+    if (res) {
+        if (res.code == 200) {
+            gameContentClick("Map")
+            MessageInfo("欢迎你！" + name)
+        } else {
+            MessageError(res.message)
+        }
     }
 }
 

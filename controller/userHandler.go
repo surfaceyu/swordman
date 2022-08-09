@@ -32,8 +32,12 @@ func CreateRole(c *gin.Context) {
 		c.JSON(http.StatusOK, utils.ResultT(consts.CodeErrorParam, "", nil))
 		return
 	}
+	if len(createRole.Name) > 21 {
+		c.JSON(http.StatusOK, utils.ResultT(consts.CodeErrorNameTooLong, "", nil))
+		return
+	}
 	if err := services.UserService.CreateRole(account.ID, createRole.Name); err != nil {
-		c.JSON(http.StatusOK, utils.ResultT(consts.CodeErrorParam, "", nil))
+		c.JSON(http.StatusOK, utils.ResultT(consts.CodeErrorParam, err.Error(), nil))
 		return
 	}
 	c.JSON(http.StatusOK, utils.ResultT(consts.CodeOk, "", nil))
