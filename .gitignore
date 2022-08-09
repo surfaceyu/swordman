@@ -1,0 +1,7 @@
+go.sum
+**/node_modules/
+**/dist/*
+**/.vscode/*
+**/logs/
+*/pnpm-lock.yaml
+word_game.zip
