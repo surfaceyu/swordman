@@ -22,6 +22,7 @@ async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
     } : {}
     try {
         const res = await axios.get(url(u), {params: data, ...config})
+        console.log("get url [%s] res is", u, res.data)
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
@@ -45,6 +46,7 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
     } : {}
     try {
         const res = await axios.post(url(u), stringify(data), config)
+        console.log("post url [%s] res is", u, res.data)
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
@@ -62,6 +64,7 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
     } : {}
     try {
         const res = await axios.put(url(u), stringify(data), config)
+        console.log("put url [%s] res is", u, res.data)
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
@@ -79,6 +82,7 @@ async function Delete(u: string, data = {}, isAuthorization = true) : Promise<an
     } : {}
     try {
         const res = await axios.delete(url(u), config)
+        console.log("delete url [%s] res is", u, res.data)
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {

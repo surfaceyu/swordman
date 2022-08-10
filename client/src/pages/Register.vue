@@ -87,7 +87,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
                 OpenRegisterMessage()
             }
         } else {
-            console.log('error submit!')
             return false
         }
     })

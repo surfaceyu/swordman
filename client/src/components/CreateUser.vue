@@ -12,7 +12,6 @@
         <br>
     </p>
     <Input place-str="请输入你的名字" @on-chat-button-click="onChatButtonClick" />
-    <a @click="gameContentClick('Map')"></a>
 </template>
 
 <script setup lang="ts">

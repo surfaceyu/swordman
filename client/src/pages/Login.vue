@@ -75,7 +75,6 @@ const submitForm = (formEl: FormInstance | undefined) => {
                 OpenLoginErrorMessage()
             }
         } else {
-            console.log('error submit!')
             return false
         }
     })

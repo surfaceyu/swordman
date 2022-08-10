@@ -38,6 +38,7 @@ func (cm *ChatMgr) Init() {
 		}
 		ch.Push(ChatMessage{
 			Uid:       v.From,
+			UserName:  v.FromName,
 			Channel:   chName,
 			Message:   v.Data,
 			CreatedAt: v.CreatedAt,
@@ -112,8 +113,10 @@ func (cc *ChatChannel) Push(msg ChatMessage) {
 }
 
 func (cc *ChatChannel) AddChat(uid int64, data string) {
+	user := UserService.GetRoleByUid(uid)
 	msg := ChatMessage{
 		Uid:       uid,
+		UserName:  user.UserName,
 		Channel:   cc.ChannelName(),
 		Message:   data,
 		CreatedAt: time.Time{},
@@ -132,6 +135,7 @@ func (cc *ChatChannel) GetMsg(count int) []ChatMessage {
 
 type ChatMessage struct {
 	Uid       int64
+	UserName  string
 	Channel   string
 	Message   string
 	CreatedAt time.Time

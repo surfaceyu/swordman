@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
 
 let props = defineProps<{
     placeStr: string
@@ -21,5 +21,8 @@ const emits = defineEmits(["onChatButtonClick"])
 
 function onChatButtonClick() {
     emits("onChatButtonClick", chatMsg.value)
+    nextTick(() => {
+        chatMsg.value = ""
+    })
 }
 </script>
