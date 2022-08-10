@@ -8,7 +8,9 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-var Conn *gorm.DB
+var (
+	Conn *gorm.DB
+)
 
 func init() {
 	dsn := "root:12345678@tcp(192.168.15.51:3306)/civ_1839?charset=utf8&parseTime=True&loc=Local"
@@ -34,4 +36,5 @@ func autoMigrate() {
 	Conn.AutoMigrate(&Account{})
 	Conn.AutoMigrate(&User{})
 	Conn.AutoMigrate(&Cache{})
+	Conn.AutoMigrate(&Chat{})
 }

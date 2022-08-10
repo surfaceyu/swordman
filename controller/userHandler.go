@@ -17,7 +17,7 @@ func Hello(c *gin.Context) {
 
 func GetRole(c *gin.Context) {
 	account := middleware.JwtAccount(c)
-	user := services.UserService.GetRole(account.ID)
+	user := services.UserService.GetRoleByAccount(account.ID)
 	c.JSON(http.StatusOK, utils.ResultT(consts.CodeOk, "", gin.H{
 		"account": account,
 		"role":    user.ToFront(),

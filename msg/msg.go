@@ -15,3 +15,15 @@ type CreateRole struct {
 	Name string
 	Sex  int8
 }
+
+type SendChatMsg struct {
+	Channel string
+	To      int64
+	Data    string
+}
+
+type GetChatMsg struct {
+	Channel string
+	To      int64
+	Limit   int
+}

@@ -6,19 +6,25 @@ import (
 	"swordsman/middleware"
 	"swordsman/model"
 	"swordsman/router"
+	"swordsman/services"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	defer model.Conn.Close()
+
 	gin.SetMode(gin.DebugMode)
+
 	r := gin.Default()
 	r.Use(middleware.Cors()) //使用中间件
 	router.InitRouter(r)
+
 	r.Static("/game", "./public")
 	r.Static("/assets", "./public/assets")
 	r.StaticFile("/vite.svg", "./public/vite.svg")
-	defer model.Conn.Close()
+
+	services.ChatService.Init()
 
 	logger.Info("服务器启动中。。。。。。")
 	if err := r.Run(":4567"); err != nil {
