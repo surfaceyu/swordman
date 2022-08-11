@@ -43,9 +43,10 @@ onBeforeMount(async () => {
 })
 
 function onServerSelect(server: iServer) {
-    http.SetRequest(`http://${server.Host}:${server.Port}/api`)
-    router.replace("/game")
-    console.log("==============", server)
+    localStorage.setItem("gameUri", `http://${server.Host}:${server.Port}/api`)
+    router.replace("/game").then(() => {
+        location.reload()
+    })
 }
 </script>
 

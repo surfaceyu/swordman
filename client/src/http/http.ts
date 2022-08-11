@@ -2,25 +2,15 @@ import axios from "axios"
 import { stringify } from 'qs'
 import router from "../router"
 
+const baseURL = localStorage.getItem("gameUri")
 let request = axios.create({
-    baseURL: 'http://139.9.53.216:4567/api',
+    baseURL: baseURL ? baseURL : "",
     timeout: 1000,
     headers: {
         'content-type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*"
     },
 })
-
-function SetRequest(baseURL: string) {
-    request = axios.create({
-        baseURL: baseURL,
-        timeout: 1000,
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            "Access-Control-Allow-Origin": "*"
-        },
-    })
-}
 
 /**
  * 发送Get请求
@@ -40,6 +30,7 @@ async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
         console.log("get url [%s] res is", u, res.data)
         return res ? res.data : null
     } catch (error: any) {
+        console.log("Get error", error)
         if (isAuthorization && error.request.status == 401) {
             router.push("/login")
         }
@@ -112,5 +103,4 @@ export default {
     Post,
     Put,
     Delete,
-    SetRequest
 }
