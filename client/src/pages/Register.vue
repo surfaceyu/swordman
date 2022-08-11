@@ -26,7 +26,7 @@
 import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import router from "../router"
-import http from '../http/http'
+import http from '../http/accountHttp'
 import { OpenRegisterMessage } from '../api/messageApi';
 
 const ruleFormRef = ref<FormInstance>()

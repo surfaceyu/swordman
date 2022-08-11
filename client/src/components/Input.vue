@@ -1,6 +1,6 @@
 <template>
     <div class="mt-4">
-        <el-input v-model="chatMsg" :placeholder="props.placeStr" clearable>
+        <el-input v-model="chatMsg" :placeholder="props.placeStr" clearable style="width: 360px;">
             <template #append>
                 <el-button @click="onChatButtonClick()">确认</el-button>
             </template>

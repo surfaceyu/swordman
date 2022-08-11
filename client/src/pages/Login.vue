@@ -27,7 +27,7 @@ import { reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { OpenLoginErrorMessage, OpenLoginSuccessMessage } from '../api/messageApi';
 import router from "../router"
-import http from '../http/http'
+import http from '../http/accountHttp'
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -68,7 +68,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
             }, false)
             if (res && res.code == 200) {
                 localStorage.setItem('token', res.token);
-                router.replace("/game")
+                router.replace("/server")
                 OpenLoginSuccessMessage()
             }
             if (res && res.status == 401) {

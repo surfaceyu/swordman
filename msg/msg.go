@@ -6,6 +6,13 @@ type Account struct {
 	Passwd  string
 }
 
+type Server struct {
+	ID   int16
+	Name string
+	Host string
+	Port int16
+}
+
 type User struct {
 	ID   int64
 	Name string

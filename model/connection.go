@@ -39,4 +39,5 @@ func autoMigrate() {
 	Conn.AutoMigrate(&User{})
 	Conn.AutoMigrate(&Cache{})
 	Conn.AutoMigrate(&Chat{})
+	Conn.AutoMigrate(&Server{})
 }

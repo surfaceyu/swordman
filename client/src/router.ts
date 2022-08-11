@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import Game from './pages/Game.vue'
 import Login from './pages/Login.vue'
 import Register from './pages/Register.vue'
+import Server from './pages/Server.vue'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -9,6 +10,7 @@ const router = createRouter({
         {path: "/", component: Game},
         {path: "/login", component: Login},
         {path: "/register", component: Register},
+        {path: "/server", component: Server},
         {path: "/game", component: Game},
     ]
 })
