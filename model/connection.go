@@ -1,11 +1,13 @@
 package model
 
 import (
+	"swordsman/config"
 	"swordsman/logger"
 	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -13,8 +15,8 @@ var (
 )
 
 func init() {
-	dsn := "root:12345678@tcp(192.168.15.51:3306)/civ_1839?charset=utf8&parseTime=True&loc=Local"
-	// dsn := "3b9rcbawlkld:pscale_pw_7wiOR6xAsF26eNYv46PVDZlj1oLl2lTt-WLHdACBoPI@tcp(l4vq442qa5b8.ap-southeast-2.psdb.cloud)/wg_1001?tls=true"
+	config.Init()
+	dsn := viper.GetString("mysql")
 	db, err := gorm.Open("mysql", dsn)
 	if err != nil {
 		logger.Fatal(err)
