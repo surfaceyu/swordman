@@ -9,9 +9,15 @@ import (
 	"swordsman/services"
 
 	"github.com/gin-gonic/gin"
+	flag "github.com/spf13/pflag"
+	godeamon "github.com/surfaceyu/godeamon"
 )
 
 func main() {
+	serverId := flag.Int32P("server", "s", 1001, "game serve id")
+
+	godeamon.App.Run()
+
 	defer model.Conn.Close()
 
 	gin.SetMode(gin.ReleaseMode)
@@ -20,7 +26,7 @@ func main() {
 	r.Use(middleware.Cors()) //使用中间件
 	router.InitRouter(r)
 
-	services.ChatService.Init()
+	services.Init(*serverId)
 
 	logger.Info("服务器启动中 [:4567]。。。。。。")
 	if err := r.Run(":4567"); err != nil {

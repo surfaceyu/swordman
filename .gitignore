@@ -4,5 +4,6 @@ go.sum
 **/.vscode/*
 **/logs/
 */pnpm-lock.yaml
-word_game.zip
 __debug_bin.exe
+game/game
+account/account

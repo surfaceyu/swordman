@@ -5,7 +5,7 @@ import router from "../router"
 const baseURL = localStorage.getItem("gameUri")
 let request = axios.create({
     baseURL: baseURL ? baseURL : "",
-    timeout: 1000,
+    timeout: 5000,
     headers: {
         'content-type': 'application/x-www-form-urlencoded',
         "Access-Control-Allow-Origin": "*"

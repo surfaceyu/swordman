@@ -9,6 +9,7 @@ import (
 type User struct {
 	ID        int64 `gorm:"primary_key"`
 	UserName  string
+	TTL       time.Time `gorm:"-"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt *time.Time `sql:"index"`
@@ -26,9 +27,9 @@ func (u User) ToFront() msg.User {
 	}
 }
 
-func GetRole(id int64) User {
-	var role User
-	Conn.First(&role, User{ID: id})
+func GetRole(id int64) *User {
+	var role = &User{}
+	Conn.First(role, User{ID: id})
 	return role
 }
 

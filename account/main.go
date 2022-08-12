@@ -8,9 +8,12 @@ import (
 	"swordsman/model"
 
 	"github.com/gin-gonic/gin"
+	godeamon "github.com/surfaceyu/godeamon"
 )
 
 func main() {
+	godeamon.App.Run()
+
 	defer model.Conn.Close()
 
 	gin.SetMode(gin.DebugMode)

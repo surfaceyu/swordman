@@ -11,13 +11,10 @@ import (
 var (
 	maxMsgLen int = 20
 	// 所有的业务类都在这儿声明
-	ChatService = &ChatMgr{
-		serverId: 1001,
-	}
+	ChatService = &ChatMgr{}
 )
 
 type ChatMgr struct {
-	serverId int32
 	Channels sync.Map
 }
 
