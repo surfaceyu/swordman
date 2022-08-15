@@ -15,4 +15,14 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks:{
+          // lodash: ['lodash'],
+          // 'element-plus': ['element-plus']
+        }
+      }
+    }
+  }
 })

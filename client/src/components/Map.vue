@@ -15,8 +15,9 @@
 </template>
 
 <script setup lang="ts">
+import get from "lodash/get"
 import { onBeforeMount, ref } from 'vue';
-import { get } from "lodash";
+// import { get } from "lodash";
 import dictMap from '../assets/config/Map.json';
 
 interface mapNode {
