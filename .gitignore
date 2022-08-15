@@ -7,3 +7,4 @@ go.sum
 __debug_bin.exe
 game/game
 account/account
+backend/public/*
