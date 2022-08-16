@@ -11,10 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Hello(c *gin.Context) {
-	c.JSON(http.StatusOK, utils.ResultT(consts.CodeOk, "", nil))
-}
-
 func GetRole(c *gin.Context) {
 	account := middleware.JwtAccount(c)
 	user := services.UserService.GetRoleByAccount(account.ID)

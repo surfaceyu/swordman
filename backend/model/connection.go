@@ -23,8 +23,8 @@ func init() {
 	}
 	db.SetLogger(logger.GetLogger())
 	db.LogMode(true)
-	db.DB().SetMaxOpenConns(2000)
-	db.DB().SetMaxIdleConns(2000)
+	db.DB().SetMaxIdleConns(10)
+	db.DB().SetMaxOpenConns(100)
 	db.DB().SetConnMaxLifetime(time.Second * 300)
 	if err = db.DB().Ping(); err != nil {
 		logger.Fatal(err)
