@@ -1,6 +1,5 @@
 import axios from "axios"
 import { stringify } from 'qs'
-import router from "../router"
 import config from '../config.json'
 
 const request = axios.create({
@@ -31,7 +30,8 @@ async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            // router.push("/login")
+            uni.navigateTo({url: "login"})
         }
     }
 }
@@ -55,7 +55,8 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            // router.push("/login")
+            uni.navigateTo({url: "login"})
         }
         return error.request
     }
@@ -73,7 +74,8 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            // router.push("/login")\
+            uni.navigateTo({url: "login"})
         }
         return error.request
     }
@@ -91,7 +93,8 @@ async function Delete(u: string, data = {}, isAuthorization = true) : Promise<an
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            // router.push("/login")
+            uni.navigateTo({url: "login"})
         }
         return error.request
     }

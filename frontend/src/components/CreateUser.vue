@@ -23,7 +23,8 @@ async function onChatButtonClick(name: string) {
     const res = await http.Put("/user/role", { "Name": name })
     if (res) {
         if (res.code == 200) {
-            gameContentClick("Map")
+                uni.$emit("sendCmd", {id: "gameContent", data: "Map"})
+
             MessageInfo("欢迎你！" + name)
         } else {
             MessageError(res.message)
@@ -31,9 +32,4 @@ async function onChatButtonClick(name: string) {
     }
 }
 
-const emits = defineEmits(["gameContentClick"])
-
-function gameContentClick(name: string) {
-    emits("gameContentClick", name)
-}
 </script>

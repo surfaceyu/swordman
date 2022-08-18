@@ -1,27 +1,26 @@
 <template>
     <p>
         <a href="javascript:void(0)">设置</a>·
-        <a href="javascript:void(0)" @click="gameContentClick('AboutGame')">游戏介绍</a>·
+        <a href="javascript:void(0)" @click="sendCmd('AboutGame')">游戏介绍</a>·
         <a href="javascript:void(0)" @click="logout">退出游戏</a>
     </p>
 </template>
 
 <script setup lang="ts">
-import { OpenLogoutMessage } from '../api/messageApi';
-import http from '../http/http.js';
-import router from '../router.js';
+import http from '../http/http';
+import accountHttp from '../http/accountHttp';
 
 async function logout() {
-    await http.Post("/auth/logout")
-    OpenLogoutMessage()
+    await accountHttp.Post("/auth/logout")
     localStorage.removeItem("token")
-    router.replace("/login")
+    uni.redirectTo({url: "../login/index"})
 }
 
-const emits = defineEmits(["gameContentClick"])
-
-function gameContentClick(name: string) {
-    emits("gameContentClick", name)
+function sendCmd(name: string) {
+	uni.$emit('sendCmd', {
+        id: "gameContent",
+        data: name
+    })
 }
 
 </script>

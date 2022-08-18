@@ -2,7 +2,7 @@
     <p>
         <a href="javascript:void(0)" @click="refreshPage">刷新</a>·
         <a href="javascript:void(0)">消息</a>·
-        <a href="javascript:void(0)" @click="gameContentClick('Map')">地图</a>
+        <a href="javascript:void(0)" @click="sendCmd('Map')">地图</a>
         <br>
         <a href="javascript:void(0)">角色</a>·
         <a href="javascript:void(0)">包袋</a>·
@@ -16,10 +16,12 @@
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(["gameContentClick"])
 
-function gameContentClick(name: string) {
-    emits("gameContentClick", name)
+function sendCmd(name: string) {
+    uni.$emit("sendCmd", {
+        id: "gameContent",
+        data: name
+    })
 }
 
 function refreshPage() {

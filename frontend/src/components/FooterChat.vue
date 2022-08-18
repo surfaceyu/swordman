@@ -40,14 +40,11 @@ async function onRefreshPage() {
     chatMsgs.value = msgs.data
 }
 
-const emits = defineEmits(["gameContentClick"])
-
-function gameContentClick(name: string) {
-    emits("gameContentClick", name)
-}
-
 function onMoreChatCliCk() {
-    gameContentClick("ContentChat")
+    uni.$emit("sendCmd", {
+        id: "gameContent",
+        data: "ContentChat"
+    })
 }
 
 defineExpose({onRefreshPage})

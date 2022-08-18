@@ -7,7 +7,6 @@
     </p>
     <Input place-str="请输入聊天内容" @on-chat-button-click="onChatButtonClick" />
     </p>
-    <a @click="sendCmd('chatRefresh')"></a>
 </template>
 
 <script setup lang="ts">
@@ -38,13 +37,12 @@ async function onChatButtonClick(data: string) {
     const res = await http.Post("/chat/chat", { "Channel": "w", "Data": data })
     if (res && res.code == 200) {
         refreshPage()
-        sendCmd('chatRefresh')
+        uni.$emit("sendCmd", {
+            id: "chatRefresh",
+            data: 1
+        })
     }
 }
-const emits = defineEmits(["gameContentClick", "sendCmd"])
 
-function sendCmd(cmd: string) {
-    emits("sendCmd", cmd, 1)
-}
 
 </script>

@@ -1,6 +1,5 @@
 import axios from "axios"
 import { stringify } from 'qs'
-import router from "../router"
 
 const baseURL = localStorage.getItem("gameUri")
 let request = axios.create({
@@ -32,7 +31,7 @@ async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
     } catch (error: any) {
         console.log("Get error", error)
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            uni.redirectTo({url: "../login/index"})
         }
     }
 }
@@ -56,7 +55,7 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            uni.redirectTo({url: "../login/index"})
         }
         return error.request
     }
@@ -74,7 +73,7 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            uni.redirectTo({url: "../login/index"})
         }
         return error.request
     }
@@ -92,7 +91,7 @@ async function Delete(u: string, data = {}, isAuthorization = true) : Promise<an
         return res ? res.data : null
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            router.push("/login")
+            uni.redirectTo({url: "../login/index"})
         }
         return error.request
     }
