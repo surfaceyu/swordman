@@ -1,16 +1,10 @@
-import axios from "axios"
-import { stringify } from 'qs'
 import get from "lodash/get"
 
-const baseURL = uni.getStorageSync("gameUri")
-let request = axios.create({
-    baseURL: baseURL ? baseURL : "",
-    timeout: 5000,
-    headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        "Access-Control-Allow-Origin": "*"
-    },
-})
+let baseURL = uni.getStorageSync("gameUri")
+
+function RefreshUrl() {
+    baseURL = uni.getStorageSync("gameUri")    
+}
 
 /**
  * 发送Get请求
@@ -75,7 +69,7 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
         console.log("post url [%s] res is", u, get(res, "data"))
         return get(res, "data")
     } catch (error: any) {
-        if (isAuthorization && error.request.status == 401) {
+        if (isAuthorization) {
             uni.redirectTo({url: "../login/index"})
         }
         return error.request
@@ -103,7 +97,7 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
         console.log("put url [%s] res is", u, get(res, "data"))
         return get(res, "data")
     } catch (error: any) {
-        if (isAuthorization && error.request.status == 401) {
+        if (isAuthorization) {
             uni.redirectTo({url: "../login/index"})
         }
         return error.request
@@ -131,7 +125,7 @@ async function Delete(u: string, data = {}, isAuthorization = true) : Promise<an
         console.log("delete url [%s] res is", u, get(res, "data"))
         return get(res, "data")
     } catch (error: any) {
-        if (isAuthorization && error.request.status == 401) {
+        if (isAuthorization) {
             uni.redirectTo({url: "../login/index"})
         }
         return error.request
@@ -143,4 +137,5 @@ export default {
     Post,
     Put,
     Delete,
+    RefreshUrl,
 }

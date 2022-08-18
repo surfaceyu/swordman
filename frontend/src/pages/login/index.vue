@@ -71,14 +71,11 @@ const rules = {
 }
 
 function submitForm() {
-    console.log("开始登录====", baseFormData.value)
     baseForm.value.validate().then(async () => {
-        console.log("开始登录2====")
         const res = await http.Post("/auth/login", {
             "Account": baseFormData.value.account,
             "Passwd": baseFormData.value.password
         }, false)
-        console.log("开始登录3====", res)
         if (res && res.code == 200) {
             uni.setStorage({
                 key: "token",

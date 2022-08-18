@@ -58,6 +58,7 @@ function sendCmd(cmd: any) {
 }
 
 onLoad(() => {
+    http.RefreshUrl()
     uni.$on('sendCmd', sendCmd);
 });
 

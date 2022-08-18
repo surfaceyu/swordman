@@ -38,10 +38,12 @@ function onServerSelect(server: iServer) {
     uni.setStorage({
         key: "gameUri",
         data: `http://${server.Host}:${server.Port}/api`,
-    })
-    uni.redirectTo({
-        url: "../game/index", success: () => {
-            location.reload()
+        success: () => {
+            uni.redirectTo({
+                url: "../game/index", success: () => {
+                    // location.reload()
+                }
+            })
         }
     })
 }
