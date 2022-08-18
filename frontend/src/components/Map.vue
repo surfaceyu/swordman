@@ -4,20 +4,20 @@
         <br>
         「附近地图」
         <br>
-        上：<a href="javascript:void(0)" @click="moveToMap(Number(topMapName.Id))">{{ topMapName.Name }}</a>
+        上：<text @click="moveToMap(Number(topMapName.Id))">{{ topMapName.Name }}</text>
         <br>
-        左：<a href="javascript:void(0)" @click="moveToMap(Number(leftMapName.Id))">{{ leftMapName.Name }}</a>
+        左：<text @click="moveToMap(Number(leftMapName.Id))">{{ leftMapName.Name }}</text>
         <br>
-        右：<a href="javascript:void(0)" @click="moveToMap(Number(rightMapName.Id))">{{ rightMapName.Name }}</a>
+        右：<text @click="moveToMap(Number(rightMapName.Id))">{{ rightMapName.Name }}</text>
         <br>
-        下：<a href="javascript:void(0)" @click="moveToMap(Number(buttonMapName.Id))">{{ buttonMapName.Name }}</a>
+        下：<text @click="moveToMap(Number(buttonMapName.Id))">{{ buttonMapName.Name }}</text>
     </p>
     <p>
         「附近有」
         <br>
-        <p style="margin: 0px;" v-for="it in mapName.Npc">
-            npc: <a href="javascript:void(0)">{{it.Name}}</a>
-        </p>
+    <p style="margin: 0px;" v-for="it in mapName.Npc">
+        npc: <text>{{ it.Name }}</text>
+    </p>
     </p>
 </template>
 
@@ -39,7 +39,7 @@ interface npcNode {
     Avatar: string,
 }
 
-let mapIdCache = localStorage.getItem("mapId") || "105";
+let mapIdCache = uni.getStorageSync("mapId") || "105";
 let mapId = ref(mapIdCache);
 
 let mapName = ref<mapNode>({ Id: 0, Name: "无", Npc: [] })
@@ -61,19 +61,21 @@ function moveToMap(toMapId: number) {
     rightMapName.value = setMapConfig(curMap?.Right)
     buttonMapName.value = setMapConfig(curMap?.Bottom)
 
-    localStorage.setItem("mapId", String(toMapId))
+    uni.setStorage({
+        key: 'mapId',
+        data: String(toMapId),
+    });
     // 设置地图视野
     // 获取地图上的NPC、野怪、玩家
-
 }
 
 function setMapConfig(mapId: number): mapNode {
     const m = get(dictMap, mapId)
-    let res: mapNode = {Id: m?.Id, Name: m?.Name, Npc: []}
+    let res: mapNode = { Id: m?.Id, Name: m?.Name, Npc: [] }
     forEach(m?.Npc, (npcId) => {
         const n = get(dictNpc, npcId)
         if (!n) return
-        res.Npc.push({Id: n.Id, Name: n.Name, Avatar: n.Avatar})
+        res.Npc.push({ Id: n.Id, Name: n.Name, Avatar: n.Avatar })
     })
     return res
 }

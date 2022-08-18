@@ -35,7 +35,10 @@ onBeforeMount(async () => {
 })
 
 function onServerSelect(server: iServer) {
-    localStorage.setItem("gameUri", `http://${server.Host}:${server.Port}/api`)
+    uni.setStorage({
+        key: "gameUri",
+        data: `http://${server.Host}:${server.Port}/api`,
+    })
     uni.redirectTo({
         url: "../game/index", success: () => {
             location.reload()

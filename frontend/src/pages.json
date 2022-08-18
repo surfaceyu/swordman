@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/game/index"
+		},
+		{
 			"path": "pages/login/index"
 		},
 		{
@@ -11,9 +14,6 @@
 			"style": {
 				"navigationBarTitleText": "hello uni-app"
 			}
-		},
-		{
-			"path": "pages/game/index"
 		},
 		{
 			"path": "pages/register/index"

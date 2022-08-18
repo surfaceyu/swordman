@@ -24,9 +24,9 @@ import AboutGame from '../../components/AboutGame.vue';
 import Map from "../../components/Map.vue";
 import ContentChat from "../../components/ContentChat.vue";
 
-const footerChatRef = ref<any>()
-const gameContentIdCache = localStorage.getItem("gameContentId")
-let gameContentId = ref(gameContentIdCache || "Map")
+const footerChatRef = ref()
+const gameContentIdCache = uni.getStorageSync("gameContentId") || "Map" 
+let gameContentId = ref(gameContentIdCache)
 let childDisabled = ref(true)
 
 onBeforeMount(async () => {
@@ -38,8 +38,10 @@ onBeforeMount(async () => {
 })
 
 function gameContentClick(id: string) {
-    console.log("gameContentClick ==", id)
-    localStorage.setItem("gameContentId", id)
+    uni.setStorage({
+        key: "gameContentId",
+        data: id,
+    })
     gameContentId.value = id
 }
 

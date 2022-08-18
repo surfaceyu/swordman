@@ -1,16 +1,16 @@
 <template>
     <p>
-        <a href="javascript:void(0)" @click="refreshPage">刷新</a>·
-        <a href="javascript:void(0)">消息</a>·
-        <a href="javascript:void(0)" @click="sendCmd('Map')">地图</a>
+        <text @click="refreshPage">刷新</text>·
+        <text>消息</text>·
+        <text @click="sendCmd('Map')">地图</text>
         <br>
-        <a href="javascript:void(0)">角色</a>·
-        <a href="javascript:void(0)">包袋</a>·
-        <a href="javascript:void(0)">私聊</a>
+        <text>角色</text>·
+        <text>包袋</text>·
+        <text>私聊</text>
         <br>
-        <a href="javascript:void(0)">社交</a>·
-        <a href="javascript:void(0)">洞府</a>·
-        <a href="javascript:void(0)">门派</a>
+        <text>社交</text>·
+        <text>洞府</text>·
+        <text>门派</text>
         <br>
     </p>
 </template>

@@ -1,15 +1,6 @@
-import axios from "axios"
-import { stringify } from 'qs'
-import config from '../config.json'
+import get from "lodash/get"
+import configJson from '../config.json'
 
-const request = axios.create({
-    baseURL: config.accountHost,
-    timeout: 1000,
-    headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        "Access-Control-Allow-Origin": "*"
-    },
-})
 
 /**
  * 发送Get请求
@@ -21,13 +12,23 @@ const request = axios.create({
 async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
     const config = isAuthorization ? {
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            "Authorization": `Bearer ${uni.getStorageSync("token")}`
         }
     } : {}
     try {
-        const res = await request.get(u, {params: data, ...config})
-        console.log("get url [%s] res is", u, res.data)
-        return res ? res.data : null
+        const res = await uni.request({
+            url: configJson.accountHost + u,
+            method: "GET",
+            data: data,
+            timeout: 5000,
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                "Access-Control-Allow-Origin": "*",
+                ...config.headers
+            }
+        })
+        console.log("get url [%s] res is", u, get(res, "data"))
+        return get(res, "data")
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
             // router.push("/login")
@@ -46,16 +47,25 @@ async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
 async function Post(u: string, data = {}, isAuthorization = true) : Promise<any> {
     const config = isAuthorization ? {
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            "Authorization": `Bearer ${uni.getStorageSync("token")}`
         }
     } : {}
     try {
-        const res = await request.post(u, stringify(data), config)
-        console.log("post url [%s] res is", u, res.data)
-        return res ? res.data : null
+        const res = await uni.request({
+            url: configJson.accountHost + u,
+            method: "POST",
+            data: data,
+            timeout: 5000,
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                "Access-Control-Allow-Origin": "*",
+                ...config.headers
+            }
+        })
+        console.log("post url [%s] res is", u, get(res, "data"))
+        return get(res, "data")
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            // router.push("/login")
             uni.navigateTo({url: "login"})
         }
         return error.request
@@ -65,13 +75,23 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
 async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> {
     const config = isAuthorization ? {
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            "Authorization": `Bearer ${uni.getStorageSync("token")}`
         }
     } : {}
     try {
-        const res = await request.put(u, stringify(data), config)
-        console.log("put url [%s] res is", u, res.data)
-        return res ? res.data : null
+        const res = await uni.request({
+            url: configJson.accountHost + u,
+            method: "PUT",
+            data: data,
+            timeout: 5000,
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                "Access-Control-Allow-Origin": "*",
+                ...config.headers
+            }
+        })
+        console.log("put url [%s] res is", u, get(res, "data"))
+        return get(res, "data")
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
             // router.push("/login")\
@@ -84,16 +104,25 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
 async function Delete(u: string, data = {}, isAuthorization = true) : Promise<any> {
     const config = isAuthorization ? {
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            "Authorization": `Bearer ${uni.getStorageSync("token")}`
         }
     } : {}
     try {
-        const res = await request.delete(u, config)
-        console.log("delete url [%s] res is", u, res.data)
-        return res ? res.data : null
+        const res = await uni.request({
+            url: configJson.accountHost + u,
+            method: "DELETE",
+            data: data,
+            timeout: 5000,
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',
+                "Access-Control-Allow-Origin": "*",
+                ...config.headers
+            }
+        })
+        console.log("delete url [%s] res is", u, get(res, "data"))
+        return get(res, "data")
     } catch (error: any) {
         if (isAuthorization && error.request.status == 401) {
-            // router.push("/login")
             uni.navigateTo({url: "login"})
         }
         return error.request

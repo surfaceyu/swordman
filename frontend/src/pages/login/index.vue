@@ -3,15 +3,15 @@
     <view class="uni-flex uni-column" style="height: 40vh;">
     </view>
     <view class="uni-flex uni-row">
-        <view class="flex-item"></view>
-        <view class="flex-item">
+        <view class="flex-item" style="width: 20vw;"></view>
+        <view class="flex-item" style="width: 60vw;">
             <uni-forms ref="baseForm" :modelValue="baseFormData" :rules="rules">
                 <uni-forms-item label="账号" required>
-                    <uni-easyinput v-model="baseFormData.account" placeholder="请输入账号" style="width: 30vw;" />
+                    <uni-easyinput v-model="baseFormData.account" placeholder="请输入账号" style="width: 35vw;" />
                 </uni-forms-item>
                 <uni-forms-item label="密码" required>
                     <uni-easyinput type=password v-model="baseFormData.password" placeholder="请输入密码"
-                        style="width: 30vw;" />
+                        style="width: 35vw;" />
                 </uni-forms-item>
             </uni-forms>
             <view class="button-group">
@@ -19,7 +19,7 @@
                 <button size="mini" @click="submitForm">提交</button>
             </view>
             <view>
-                <navigator url="../register/index" hover-class="navigator-hover" open-type="redirect" style="font-size: 14px; margin-top: 10rpx;">
+                <navigator url="../register/index" hover-class="navigator-hover" style="font-size: 14px; margin-top: 10rpx;">
 					没有账号？先去注册
 				</navigator>
             </view>
@@ -71,14 +71,20 @@ const rules = {
 }
 
 function submitForm() {
+    console.log("开始登录====", baseFormData.value)
     baseForm.value.validate().then(async () => {
+        console.log("开始登录2====")
         const res = await http.Post("/auth/login", {
             "Account": baseFormData.value.account,
             "Passwd": baseFormData.value.password
         }, false)
+        console.log("开始登录3====", res)
         if (res && res.code == 200) {
-            localStorage.setItem('token', res.token);
-            uni.redirectTo({ url: "../server/index" })
+            uni.setStorage({
+                key: "token",
+                data: res.token,
+            })
+            uni.navigateTo({ url: "../server/index" })
         }
     })
 }
@@ -99,6 +105,7 @@ function submitForm() {
 .uni-form-item .title {
     padding: 20rpx 0;
 }
+
 </style>
 
 <style lang="scss">

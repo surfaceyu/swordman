@@ -3,17 +3,17 @@
         「传音」
         <br>
     <p style="margin: 0px;" v-for="msg in chatMsgs">
-        <a href="javascript:void(0)">{{ msg.UserName }}</a>:{{ msg.Message }}
+        <text>{{ msg.UserName }}</text>:{{ msg.Message }}
     </p>
-    <a href="javascript:void(0)" @click="onMoreChatCliCk()">查看更多</a>
+    <text @click="onMoreChatCliCk()">查看更多</text>
     </p>
     <p>
         「江湖传闻」
         <br>
     <p style="margin: 0px;" v-for="msg in chatMsgs">
-        <a href="javascript:void(0)">{{ msg.UserName }}</a>:{{ msg.Message }}
+        <text>{{ msg.UserName }}</text>:{{ msg.Message }}
     </p>
-    <a href="javascript:void(0)">查看更多</a>
+    <text>查看更多</text>
     </p>
 </template>
 

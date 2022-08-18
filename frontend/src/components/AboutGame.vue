@@ -2,15 +2,15 @@
     <p style="white-space: pre-wrap;">
         「游戏介绍」
         <br>
-        <a href="javascript:void(0)" @click="aboutGameClick('equip')">装备</a>|
-        <a href="javascript:void(0)">道具</a>|
-        <a href="javascript:void(0)">玩法</a>|
-        <a href="javascript:void(0)" @click="aboutGameClick('map')">地图</a>|
-        <a href="javascript:void(0)">门派</a>|
-        <a href="javascript:void(0)">私聊</a>|
-        <a href="javascript:void(0)">副本</a>|
-        <a href="javascript:void(0)">其他</a>|
-        <a href="javascript:void(0)">说明</a>
+        <text @click="aboutGameClick('equip')">装备</text>|
+        <text>道具</text>|
+        <text>玩法</text>|
+        <text @click="aboutGameClick('map')">地图</text>|
+        <text>门派</text>|
+        <text>私聊</text>|
+        <text>副本</text>|
+        <text>其他</text>|
+        <text>说明</text>
         <br>
         {{ gameIntroduction }}
     </p>

@@ -3,7 +3,7 @@
         「传音」
         <br>
     <p style="margin: 0px;" v-for="msg in chatMsgs">
-        <a href="javascript:void(0)">{{ msg.UserName }}</a>:{{ msg.Message }}
+        <text>{{ msg.UserName }}</text>:{{ msg.Message }}
     </p>
     <Input place-str="请输入聊天内容" @on-chat-button-click="onChatButtonClick" />
     </p>
