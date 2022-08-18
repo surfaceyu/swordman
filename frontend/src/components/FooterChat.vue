@@ -37,7 +37,7 @@ onBeforeMount(async () => {
 
 async function onRefreshPage() {
     const msgs = await http.Get("/chat/chat", { "Channel": "w", "Limit": 2 })
-    chatMsgs.value = msgs.data
+    chatMsgs.value = msgs?.data
 }
 
 function onMoreChatCliCk() {

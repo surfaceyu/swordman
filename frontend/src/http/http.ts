@@ -1,5 +1,5 @@
 import get from "lodash/get"
-
+import last from "lodash/last"
 let baseURL = uni.getStorageSync("gameUri")
 
 function RefreshUrl() {
@@ -32,11 +32,19 @@ async function Get(u: string, data = {}, isAuthorization = true): Promise<any>{
             }
         })
         console.log("get url [%s] res is", u, get(res, "data"))
+        if (isAuthorization && get(res, ["data", "code"]) == 401) {
+            if (last(getCurrentPages())?.route != "/pages/login/index") {                
+                uni.redirectTo({url: "../login/index"})
+            }
+            return
+        }
         return get(res, "data")
     } catch (error: any) {
         console.log("Get error", error)
         if (isAuthorization && error.request.status == 401) {
-            uni.redirectTo({url: "../login/index"})
+            if (last(getCurrentPages())?.route != "/pages/login/index") {                
+                uni.redirectTo({url: "../login/index"})
+            }
         }
     }
 }
@@ -67,9 +75,15 @@ async function Post(u: string, data = {}, isAuthorization = true) : Promise<any>
             }
         })
         console.log("post url [%s] res is", u, get(res, "data"))
+        if (isAuthorization &&
+            get(res, ["data", "code"]) == 401
+            && last(getCurrentPages())?.route != "/pages/login/index") {
+                uni.redirectTo({url: "../login/index"})
+            return
+        }
         return get(res, "data")
     } catch (error: any) {
-        if (isAuthorization) {
+        if (isAuthorization && last(getCurrentPages())?.route != "/pages/login/index") {
             uni.redirectTo({url: "../login/index"})
         }
         return error.request
@@ -95,9 +109,15 @@ async function Put(u: string, data = {}, isAuthorization = true) : Promise<any> 
             }
         })
         console.log("put url [%s] res is", u, get(res, "data"))
+        if (isAuthorization &&
+            get(res, ["data", "code"]) == 401
+            && last(getCurrentPages())?.route != "/pages/login/index") {
+                uni.redirectTo({url: "../login/index"})
+            return
+        }
         return get(res, "data")
     } catch (error: any) {
-        if (isAuthorization) {
+        if (isAuthorization && last(getCurrentPages())?.route != "/pages/login/index") {
             uni.redirectTo({url: "../login/index"})
         }
         return error.request
@@ -123,9 +143,15 @@ async function Delete(u: string, data = {}, isAuthorization = true) : Promise<an
             }
         })
         console.log("delete url [%s] res is", u, get(res, "data"))
+        if (isAuthorization &&
+            get(res, ["data", "code"]) == 401 &&
+            last(getCurrentPages())?.route != "/pages/login/index") {
+            uni.redirectTo({url: "../login/index"})
+            return
+        }
         return get(res, "data")
     } catch (error: any) {
-        if (isAuthorization) {
+        if (isAuthorization && last(getCurrentPages())?.route != "/pages/login/index") {
             uni.redirectTo({url: "../login/index"})
         }
         return error.request

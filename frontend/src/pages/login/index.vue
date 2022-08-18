@@ -81,7 +81,7 @@ function submitForm() {
                 key: "token",
                 data: res.token,
             })
-            uni.navigateTo({ url: "../server/index" })
+            uni.redirectTo({ url: "../server/index" })
         }
     })
 }
