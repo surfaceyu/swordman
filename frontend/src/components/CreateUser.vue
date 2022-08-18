@@ -15,20 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { MessageInfo, MessageError } from '../api/messageApi';
 import http from '../http/http';
 import Input from './Input.vue';
 
 async function onChatButtonClick(name: string) {
     const res = await http.Put("/user/role", { "Name": name })
-    if (res) {
-        if (res.code == 200) {
-                uni.$emit("sendCmd", {id: "gameContent", data: "Map"})
-
-            MessageInfo("欢迎你！" + name)
-        } else {
-            MessageError(res.message)
-        }
+    if (res && res.code == 200) {
+        uni.$emit("sendCmd", {id: "gameContent", data: "Map"})
     }
 }
 

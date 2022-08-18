@@ -5,8 +5,8 @@
     <p style="margin: 0px;" v-for="msg in chatMsgs">
         <text>{{ msg.UserName }}</text>:{{ msg.Message }}
     </p>
-    <Input place-str="请输入聊天内容" @on-chat-button-click="onChatButtonClick" />
     </p>
+    <Input style="height: 50px;" place-str="请输入聊天内容" @on-chat-button-click="onChatButtonClick" />
 </template>
 
 <script setup lang="ts">
