@@ -1,10 +1,12 @@
 <template>
     <div class="mt-4">
-        <el-input v-model="chatMsg" :placeholder="props.placeStr" clearable style="width: 360px;">
+        <uni-easyinput v-model="chatMsg" :placeholder="props.placeStr" style="width: 80vw;" suffixIcon="paperplane" @iconClick="onChatButtonClick"/>
+        <!-- <button size="mini" @click="onChatButtonClick">确认</button> -->
+        <!-- <el-input v-model="chatMsg" :placeholder="props.placeStr" clearable style="width: 360px;">
             <template #append>
                 <el-button @click="onChatButtonClick()">确认</el-button>
             </template>
-        </el-input>
+        </el-input> -->
     </div>
 </template>
 

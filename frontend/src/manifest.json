@@ -1,8 +1,8 @@
 {
-    "name" : "",
-    "appid" : "",
+    "name" : "文字武侠",
+    "appid" : "__UNI__BA5EE96",
     "description" : "",
-    "versionName" : "1.0.0",
+    "versionName" : "0.0.5",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
